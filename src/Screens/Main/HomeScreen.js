@@ -26,7 +26,7 @@ const HomeScreen = () => {
     navigation.setOptions({
       headerTitle: () => (
         <Text style={{ fontSize: 16, fontWeight: "bold", textAlign: "center" }}>
-          Swift Chat
+          ConvoConnect
         </Text>
       ),
       headerTitleAlign: "center", // Align the header title to the center
@@ -64,6 +64,7 @@ const HomeScreen = () => {
   console.log("users", users);
   return (
     <ScrollView
+      className="bg-white"
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
       }

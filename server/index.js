@@ -5,6 +5,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+// const path = require("path");
+// const fs = require("fs");
+// const cloudinary = require("cloudinary").v2;
+
 dotenv.config();
 
 const app = express();
@@ -16,6 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
+// cloudinary.config({
+//   cloud_name: "dr2iv5fga",
+//   api_key: "873193243926322",
+//   api_secret: "bCSrN5MnV9q_VD3huIuayyyqRSc",
+// });
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -38,25 +47,33 @@ const Message = require("./Models/messages");
 //endpoint for registration of the user
 
 app.post("/register", async (req, res) => {
-  const { name, email, password, image } = req.body;
+  try {
+    const { name, email, password, image, number } = req.body;
 
-  // create a new User object
-  const user = await User.findOne({ email: email });
-  if (user) {
-    return res.status(400).json({ message: "User already exists" });
-  }
-  const newUser = new User({ name, email, password, image });
-
-  // save the user to the database
-  newUser
-    .save()
-    .then(() => {
-      res.status(200).json({ message: "User registered successfully" });
-    })
-    .catch((err) => {
-      console.log("Error registering user", err);
-      res.status(500).json({ message: "Error registering the user!" });
+    // Check if the user already exists
+    const user = await User.findOne({
+      $or: [{ email: email }, { number: number }],
     });
+    if (user) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // Decode the image path
+    const newUser = new User({
+      name,
+      email,
+      password,
+      image,
+      number,
+    });
+
+    // Save the user to the database
+    await newUser.save();
+    res.status(200).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error("Error registering user", error);
+    res.status(500).json({ message: "Error registering the user!" });
+  }
 });
 
 app.get("/userById/:id", async (req, res) => {

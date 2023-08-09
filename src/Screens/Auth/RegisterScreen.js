@@ -14,12 +14,15 @@ import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { API } from "../../../APi";
 import * as ImagePicker from "expo-image-picker";
+import CountryPicker from "react-native-country-picker-modal";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState(null);
+  const [number, setNumber] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const navigation = useNavigation();
 
   const pickImage = async () => {
@@ -44,6 +47,7 @@ const RegisterScreen = () => {
       email: email,
       password: password,
       image: image,
+      number: number,
     };
 
     axios
@@ -60,6 +64,7 @@ const RegisterScreen = () => {
         setEmail("");
         setPassword("");
         setImage("");
+        setNumber("");
         navigation.navigate("Login");
       })
       .catch((error) => {
@@ -177,6 +182,38 @@ const RegisterScreen = () => {
               placeholderTextColor={"black"}
               placeholder="Password"
             />
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <Text style={{ fontSize: 18, fontWeight: "600", color: "gray" }}>
+              Phone Number
+            </Text>
+
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {/* Country Picker Modal */}
+              <CountryPicker
+                onSelect={(country) => setSelectedCountry(country)}
+                withCallingCode={true}
+                withFilter
+                countryCode={selectedCountry ? selectedCountry.cca2 : "US"}
+                visi
+              />
+
+              {/* Phone Number Input */}
+              <TextInput
+                value={number}
+                onChangeText={(text) => setNumber(text)}
+                keyboardType="phone-pad"
+                style={{
+                  fontSize: 18,
+                  borderBottomColor: "gray",
+                  borderBottomWidth: 1,
+                  marginVertical: 10,
+                  flex: 1,
+                }}
+                placeholderTextColor={"black"}
+                placeholder="Enter Your Phone Number"
+              />
+            </View>
           </View>
 
           <Pressable

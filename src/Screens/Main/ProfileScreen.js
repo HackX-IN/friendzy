@@ -51,7 +51,11 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, paddingTop: Platform.OS === "android" ? 40 : 0 }}
+      style={{
+        flex: 1,
+        paddingTop: Platform.OS === "android" ? 10 : 0,
+        backgroundColor: "white",
+      }}
     >
       <View style={styles.container}>
         <Image
@@ -72,8 +76,9 @@ const ProfileScreen = () => {
         <View className="flex-col justify-center items-center p-3 space-x-3 py-12 ">
           <Text className="font-bold text-xl text-black">{user?.name}</Text>
           <Text className="text-gray-500">{user?.email}</Text>
+          <Text className="text-gray-500">{user?.number}</Text>
         </View>
-        <View className=" w-[80%] h-[50%] bg-yellow-500 p-3 space-x-2 py-3 left-11 rounded-2xl ">
+        <View className=" w-[80%] h-[50%] p-3 space-x-2 py-3 left-11 rounded-2xl ">
           <View className=" m-3">
             <TouchableOpacity className="p-5 bg-slate-600 space-x-2 py-3 rounded-2xl mb-3 flex-row items-center ">
               <MaterialIcons name="security" size={24} color="white" />

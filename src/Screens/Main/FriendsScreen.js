@@ -32,7 +32,12 @@ const FriendsScreen = () => {
 
   console.log(friendRequests);
   return (
-    <View style={{ padding: 10, marginHorizontal: 12 }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+      }}
+    >
       {friendRequests.length > 0 && <Text>Your Friend Requests!</Text>}
 
       {friendRequests.map((item, index) => (

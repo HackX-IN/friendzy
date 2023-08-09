@@ -6,6 +6,7 @@ import { UserContext } from "./UserContext";
 export default function App() {
   return (
     <>
+      <StatusBar style="auto" backgroundColor="#fff" translucent={false} />
       <UserContext>
         <StackNavigator />
       </UserContext>

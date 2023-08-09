@@ -8,9 +8,9 @@ import {
   MessageScreen,
   ProfileScreen,
 } from "../Screens/Main/index";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from "@expo/vector-icons";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -27,7 +27,11 @@ const StackNavigator = () => {
           component={RegisterScreen}
           options={{ headerShown: false }}
         />
-         <Stack.Screen name="tabs" component={MyTabs}  options={{ headerShown: false }}  />
+        <Stack.Screen
+          name="tabs"
+          component={MyTabs}
+          options={{ headerShown: false }}
+        />
 
         <Stack.Screen name="Messages" component={MessageScreen} />
       </Stack.Navigator>
@@ -37,7 +41,6 @@ const StackNavigator = () => {
 
 export default StackNavigator;
 
-
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
@@ -45,17 +48,16 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-      
+        tabBarActiveTintColor: "#e91e63",
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: "Friends",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="people" size={size} color={color} />
           ),
         }}
       />
@@ -63,18 +65,17 @@ function MyTabs() {
         name="Friends"
         component={FriendsScreen}
         options={{
-          tabBarLabel: 'Friends',
+          tabBarLabel: "Add Friends",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
+            <Ionicons name="person-add" size={size} color={color} />
           ),
-         
         }}
       />
       <Tab.Screen
         name="Chats"
         component={ChatScreen}
         options={{
-          tabBarLabel: 'Chat',
+          tabBarLabel: "Chat",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="chatbox" size={size} color={color} />
           ),
@@ -84,8 +85,8 @@ function MyTabs() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
-          headerShown:false,
+          tabBarLabel: "Profile",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
