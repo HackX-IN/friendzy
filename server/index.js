@@ -59,7 +59,7 @@ app.post("/register", async (req, res) => {
     });
 });
 
-app.get('/userById/:id', async (req, res) => {
+app.get("/userById/:id", async (req, res) => {
   const userId = req.params.id;
 
   try {
@@ -67,14 +67,14 @@ app.get('/userById/:id', async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // If user is found, return the user data
     res.status(200).json({ user });
   } catch (err) {
-    console.log('Error fetching user by ID', err);
-    res.status(500).json({ message: 'Error fetching user by ID' });
+    console.log("Error fetching user by ID", err);
+    res.status(500).json({ message: "Error fetching user by ID" });
   }
 });
 const createToken = (userId) => {
