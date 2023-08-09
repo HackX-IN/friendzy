@@ -43,9 +43,7 @@ const HomeScreen = () => {
       const userId = decodedToken.userId;
       setUserId(userId);
 
-      const response = await axios.get(
-        `http://192.168.1.7:8000/users/${userId}`
-      );
+      const response = await axios.get(API + `/users/${userId}`);
       if (Array.isArray(response.data)) {
         setUsers(response.data);
       } else {

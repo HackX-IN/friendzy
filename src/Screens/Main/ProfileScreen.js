@@ -21,6 +21,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import jwt_decode from "jwt-decode";
 
 import axios from "axios";
+import { API } from "../../../APi";
 const ProfileScreen = () => {
   const [user, setuser] = useState(null);
   const navigation = useNavigation();
@@ -31,9 +32,7 @@ const ProfileScreen = () => {
       const decodedToken = jwt_decode(token);
       const userId = decodedToken.userId;
 
-      const response = await axios.get(
-        `http://192.168.1.7:8000/userById/${userId}`
-      );
+      const response = await axios.get(API + `/userById/${userId}`);
       console.log(response.data.user);
       setuser(response.data.user);
     };
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    top: Platform.OS === "android" ? 180:150,
+    top: Platform.OS === "android" ? 180 : 150,
     left: 0,
     right: 0,
   },

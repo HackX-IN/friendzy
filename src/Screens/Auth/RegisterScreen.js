@@ -12,8 +12,8 @@ import {
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-
-import * as ImagePicker from 'expo-image-picker'
+import { API } from "../../../APi";
+import * as ImagePicker from "expo-image-picker";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,6 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState("");
   const [image, setImage] = useState(null);
   const navigation = useNavigation();
-
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -48,7 +47,7 @@ const RegisterScreen = () => {
     };
 
     axios
-      .post("http://192.168.1.7:8000/register", user)
+      .post(API + "/register", user)
       .then((response) => {
         console.log(response.data);
         // Store the user data in AsyncStorage
@@ -101,14 +100,23 @@ const RegisterScreen = () => {
         </View>
 
         <View style={{ marginTop: 50 }}>
-          <Pressable className="flex justify-center items-center py-1 px-2" onPress={pickImage}>
-           {image ? <Image source={{ uri: image }}  className="w-20 h-20 rounded-full"/>:
-          <Image
-            source={{
-              uri: "https://cdn.dribbble.com/userupload/8313273/file/still-6d0532b705cc54c25accac362f7dfbaa.png?resize=320x240&vertical=center",
-            }}
-            className="w-20 h-20 rounded-full"
-          />}
+          <Pressable
+            className="flex justify-center items-center py-1 px-2"
+            onPress={pickImage}
+          >
+            {image ? (
+              <Image
+                source={{ uri: image }}
+                className="w-20 h-20 rounded-full"
+              />
+            ) : (
+              <Image
+                source={{
+                  uri: "https://cdn.dribbble.com/userupload/8313273/file/still-6d0532b705cc54c25accac362f7dfbaa.png?resize=320x240&vertical=center",
+                }}
+                className="w-20 h-20 rounded-full"
+              />
+            )}
           </Pressable>
           <View style={{ marginTop: 10 }}>
             <Text style={{ fontSize: 18, fontWeight: "600", color: "gray" }}>

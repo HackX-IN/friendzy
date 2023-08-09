@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Pressable, Image } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { UserType } from "../../UserContext";
+import { API } from "../../APi";
 
 const UserChat = ({ item }) => {
   const { userId, setUserId } = useContext(UserType);
@@ -9,9 +10,7 @@ const UserChat = ({ item }) => {
   const navigation = useNavigation();
   const fetchMessages = async () => {
     try {
-      const response = await fetch(
-        `http://192.168.1.7:8000/messages/${userId}/${item._id}`
-      );
+      const response = await fetch(API + `/messages/${userId}/${item._id}`);
       const data = await response.json();
 
       if (response.ok) {

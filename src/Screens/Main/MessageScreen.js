@@ -7,7 +7,7 @@ import {
   TextInput,
   Pressable,
   Image,
-  Platform
+  Platform,
 } from "react-native";
 import React, {
   useState,
@@ -25,6 +25,7 @@ import EmojiSelector from "react-native-emoji-selector";
 import { UserType } from "../../../UserContext";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { API } from "../../../APi";
 
 const ChatMessagesScreen = () => {
   const [showEmojiSelector, setShowEmojiSelector] = useState(false);
@@ -60,9 +61,7 @@ const ChatMessagesScreen = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(
-        `http://192.168.1.7:8000/messages/${userId}/${recepientId}`
-      );
+      const response = await fetch(API + `/messages/${userId}/${recepientId}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -82,9 +81,7 @@ const ChatMessagesScreen = () => {
   useEffect(() => {
     const fetchRecepientData = async () => {
       try {
-        const response = await fetch(
-          `http://192.168.1.7:8000/user/${recepientId}`
-        );
+        const response = await fetch(API + `/user/${recepientId}`);
 
         const data = await response.json();
         setRecepientData(data);
@@ -114,7 +111,7 @@ const ChatMessagesScreen = () => {
         formData.append("messageText", message);
       }
 
-      const response = await fetch("http://192.168.1.7:8000/messages", {
+      const response = await fetch(API + "/messages", {
         method: "POST",
         body: formData,
       });
@@ -187,7 +184,7 @@ const ChatMessagesScreen = () => {
 
   const deleteMessages = async (messageIds) => {
     try {
-      const response = await fetch("http://192.168.1.7:8000/deleteMessages", {
+      const response = await fetch(API + "/deleteMessages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -241,10 +238,7 @@ const ChatMessagesScreen = () => {
     }
   };
   return (
-    <KeyboardAvoidingView
-    style={{ flex: 1, backgroundColor: "#F0F0F0" }}
-    
-  >
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "#F0F0F0" }}>
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={{ flexGrow: 1 }}
@@ -306,9 +300,9 @@ const ChatMessagesScreen = () => {
             const imageUrl = item.imageUrl;
             const filename = imageUrl.split("\\").pop();
             console.log(filename);
-          
+
             const source = { uri: baseUrl + filename };
-          
+
             return (
               <Pressable
                 key={index}
@@ -354,7 +348,6 @@ const ChatMessagesScreen = () => {
               </Pressable>
             );
           }
-          
         })}
       </ScrollView>
 
