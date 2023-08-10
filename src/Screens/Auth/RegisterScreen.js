@@ -47,6 +47,17 @@ const RegisterScreen = () => {
       Alert.alert("you need to give up permission to work");
     }
   };
+  const handleNumberChange = (text) => {
+    // Remove any existing calling code from the input text
+    const strippedText = text.replace(`+${selectedCountry.callingCode}`, "");
+
+    // If a country is selected, prepend the calling code to the stripped text
+    if (selectedCountry) {
+      setNumber(`+${selectedCountry.callingCode}${strippedText}`);
+    } else {
+      setNumber(text); // No country selected, update the number as is
+    }
+  };
 
   const handleRegister = () => {
     const user = {
@@ -227,7 +238,7 @@ const RegisterScreen = () => {
               {/* Phone Number Input */}
               <TextInput
                 value={number}
-                onChangeText={(text) => setNumber(text)}
+                onChangeText={handleNumberChange}
                 keyboardType="phone-pad"
                 style={{
                   fontSize: 18,

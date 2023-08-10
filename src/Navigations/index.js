@@ -9,14 +9,14 @@ import {
   ProfileScreen,
 } from "../Screens/Main/index";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import SplashScreen from "../Screens/Auth/SplashScreen";
 import { Ionicons } from "@expo/vector-icons";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen
           name="Login"
           component={LoginScreen}
@@ -32,7 +32,11 @@ const StackNavigator = () => {
           component={MyTabs}
           options={{ headerShown: false }}
         />
-
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="Messages" component={MessageScreen} />
       </Stack.Navigator>
     </NavigationContainer>

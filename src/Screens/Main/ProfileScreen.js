@@ -76,7 +76,7 @@ const ProfileScreen = () => {
         <View className="flex-col justify-center items-center p-3 space-x-3 py-12 ">
           <Text className="font-bold text-xl text-black">{user?.name}</Text>
           <Text className="text-gray-500">{user?.email}</Text>
-          <Text className="text-gray-500">{user?.number}</Text>
+          <Text className="text-gray-500">+{user?.number}</Text>
         </View>
         <View className=" w-[80%] h-[50%] p-3 space-x-2 py-3 left-11 rounded-2xl ">
           <View className=" m-3">
