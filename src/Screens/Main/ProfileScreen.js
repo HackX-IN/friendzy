@@ -65,7 +65,7 @@ const ProfileScreen = () => {
           style={styles.backgroundImage}
         />
         <View style={styles.header}>
-          <Pressable>
+          <Pressable onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={24} color="black" />
           </Pressable>
           <Feather name="edit" size={24} color="black" />

@@ -36,7 +36,7 @@ const SplashScreen = ({ navigation }) => {
           source={require("../../../assets/Splash1.png")}
           style={styles.image}
         />
-        <ActivityIndicator size={"medium"} color="white" />
+        <ActivityIndicator size={"small"} color="white" />
       </View>
     </View>
   );
