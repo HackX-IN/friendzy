@@ -37,7 +37,14 @@ const RegisterScreen = () => {
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      let newfile = {
+        uri: result.assets[0].uri,
+        type: `test/${result.assets[0].uri.split(".")[1]}`,
+        name: `test.${result.assets[0].uri.split(".")[1]}`,
+      };
+      handleUpload(newfile);
+    } else {
+      Alert.alert("you need to give up permission to work");
     }
   };
 
@@ -73,6 +80,27 @@ const RegisterScreen = () => {
           "An error occurred while registering"
         );
         console.log("registration failed", error);
+      });
+  };
+
+  const handleUpload = (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "Friendzy");
+    data.append("cloud_name", "inamneda");
+
+    fetch("https://api.cloudinary.com/v1_1/inamneda/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // setImage(data.url);
+
+        setImage(data?.url);
+      })
+      .catch((err) => {
+        Alert.alert("error while uploading");
       });
   };
 
@@ -192,10 +220,8 @@ const RegisterScreen = () => {
               {/* Country Picker Modal */}
               <CountryPicker
                 onSelect={(country) => setSelectedCountry(country)}
-                withCallingCode={true}
                 withFilter
                 countryCode={selectedCountry ? selectedCountry.cca2 : "US"}
-                visi
               />
 
               {/* Phone Number Input */}

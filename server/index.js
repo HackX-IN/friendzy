@@ -5,9 +5,6 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-// const path = require("path");
-// const fs = require("fs");
-// const cloudinary = require("cloudinary").v2;
 
 dotenv.config();
 
@@ -20,11 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-// cloudinary.config({
-//   cloud_name: "dr2iv5fga",
-//   api_key: "873193243926322",
-//   api_secret: "bCSrN5MnV9q_VD3huIuayyyqRSc",
-// });
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

@@ -55,9 +55,9 @@ function MyTabs() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Friends",
+          tabBarLabel: "Add Friends",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="people" size={size} color={color} />
+            <Ionicons name="person-add" size={size} color={color} />
           ),
         }}
       />
@@ -65,9 +65,9 @@ function MyTabs() {
         name="Friends"
         component={FriendsScreen}
         options={{
-          tabBarLabel: "Add Friends",
+          tabBarLabel: "Friends",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-add" size={size} color={color} />
+            <Ionicons name="people" size={size} color={color} />
           ),
         }}
       />
